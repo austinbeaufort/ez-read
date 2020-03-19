@@ -11,6 +11,11 @@ const ezRead = {
     
   },
 
+  average: function(arr) {
+    const result = this.sum(arr) / arr.length;
+    return result;
+  },
+
   cond: function(...args) {
     for (let i = 0; i < args.length; i++) {
       if (i % 2 === 0) {
