@@ -156,6 +156,18 @@ const ezRead = {
     }
   },
 
+  init: function(item) {
+    if ((typeof item === 'string' || Array.isArray(item)) && this.not(this.empty(item))) {
+      return item.slice(0, item.length - 1);
+    }
+    else if ((typeof item === 'string' || Array.isArray(item)) && this.empty(item)) {
+        throw new Error(`Empty input:\nCannot retrieve init of empty string or array`);
+    }
+    else {
+        throw new TypeError(`Expected: string or array\n Actual: ${typeof item}`);
+    }
+  },
+
   input: function(prompt) {
     const userInput = readlineSync.question(prompt);
     return userInput;
@@ -337,6 +349,18 @@ const ezRead = {
     return sum;
   },
 
+  tail: function(item) {
+    if ((typeof item === 'string' || Array.isArray(item)) && this.not(this.empty(item))) {
+      return item.slice(1, item.length);
+    }
+    else if ((typeof item === 'string' || Array.isArray(item)) && this.empty(item)) {
+        throw new Error(`Empty input:\nCannot retrieve init of empty string or array`);
+    }
+    else {
+        throw new TypeError(`Expected: string or array\n Actual: ${typeof item}`);
+    }
+  },
+
   unique: function(arr) {
     if (Array.isArray(arr)) {
       let uniques = [];
@@ -375,6 +399,6 @@ function makeReverseArray(firstNumber, secondNumber) {
 }
 
 // ------------------------------------------------------------------------------------------
-console.log(ezRead.last([1,2,3,4,5]))
+console.log(ezRead.tail([1,2,3,4,5]))
 
 module.exports = ezRead 
