@@ -399,6 +399,5 @@ function makeReverseArray(firstNumber, secondNumber) {
 }
 
 // ------------------------------------------------------------------------------------------
-console.log(ezRead.tail([1,2,3,4,5]))
 
 module.exports = ezRead 
