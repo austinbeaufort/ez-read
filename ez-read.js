@@ -122,6 +122,18 @@ const ezRead = {
     }
   },
 
+  head: function(item) {
+      if ((typeof item === 'string' || Array.isArray(item)) && this.not(this.empty(item))) {
+        return item[0]
+      }
+      else if ((typeof item === 'string' || Array.isArray(item)) && this.empty(item)) {
+          throw new Error(`Empty input:\nCannot retrieve head of empty string or array`);
+      }
+      else {
+          throw new TypeError(`Expected: string or array\n Actual: ${typeof item}`);
+      }
+  },
+
   ifThen: function(cond, callback) {
     if (cond && (typeof callback === 'function')) {
       return callback();
@@ -157,13 +169,25 @@ const ezRead = {
     return item;
   },
 
+  last: function(item) {
+    if ((typeof item === 'string' || Array.isArray(item)) && this.not(this.empty(item))) {
+      return item[item.length - 1];
+    }
+    else if ((typeof item === 'string' || Array.isArray(item)) && this.empty(item)) {
+        throw new Error(`Empty input:\nCannot retrieve last of empty string or array`);
+    }
+    else {
+        throw new TypeError(`Expected: string or array\n Actual: ${typeof item}`);
+    }
+    },
+
   nil: function(item) {
     const isNil = item === null || item === undefined;
     return isNil;
   },
 
   not: function(bool) {
-    if (typeof bool === true || typeof bool === false) {
+    if (typeof bool === 'boolean') {
       return !bool;
     }
     else {
@@ -351,6 +375,6 @@ function makeReverseArray(firstNumber, secondNumber) {
 }
 
 // ------------------------------------------------------------------------------------------
+console.log(ezRead.last([1,2,3,4,5]))
 
-
-module.exports = ezRead
+module.exports = ezRead 
