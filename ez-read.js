@@ -12,7 +12,8 @@ const ezRead = {
   },
 
   average: function(arr) {
-    const result = this.sum(arr) / arr.length;
+    const summedArray =  arr.reduce((acc, current) => acc + current, 0);
+    const result = summedArray / arr.length;
     return result;
   },
 
@@ -71,11 +72,6 @@ const ezRead = {
     }
   },
 
-  exists: function(item) {
-    const itemExists = this.not(this.nil(item)) && this.not(this.empty(item));
-    return itemExists;
-  },
-
   flattenAll: function(...arrays) {
     let levelArray = [];
     for (let i = 0; i < arrays.length; i++) {
@@ -102,7 +98,7 @@ const ezRead = {
         && item[prop] !== null
         && (typeof item[prop] === "object" || typeof item[prop] === "function")
         && !Object.isFrozen(item[prop])) {
-          this.freeze(item[prop]);
+          Object.freeze(item[prop]);
         }
       });
       
@@ -123,10 +119,10 @@ const ezRead = {
   },
 
   head: function(item) {
-      if ((typeof item === 'string' || Array.isArray(item)) && this.not(this.empty(item))) {
+      if ((typeof item === 'string' || Array.isArray(item)) && item !== '' && item !== []) {
         return item[0]
       }
-      else if ((typeof item === 'string' || Array.isArray(item)) && this.empty(item)) {
+      else if ((typeof item === 'string' || Array.isArray(item)) && (item === '' || item === [])) {
           throw new Error(`Empty input:\nCannot retrieve head of empty string or array`);
       }
       else {
@@ -157,10 +153,10 @@ const ezRead = {
   },
 
   init: function(item) {
-    if ((typeof item === 'string' || Array.isArray(item)) && this.not(this.empty(item))) {
+    if ((typeof item === 'string' || Array.isArray(item)) && item !== '' && item !== []) {
       return item.slice(0, item.length - 1);
     }
-    else if ((typeof item === 'string' || Array.isArray(item)) && this.empty(item)) {
+    else if ((typeof item === 'string' || Array.isArray(item)) && (item === '' || item === [])) {
         throw new Error(`Empty input:\nCannot retrieve init of empty string or array`);
     }
     else {
@@ -182,10 +178,10 @@ const ezRead = {
   },
 
   last: function(item) {
-    if ((typeof item === 'string' || Array.isArray(item)) && this.not(this.empty(item))) {
+    if ((typeof item === 'string' || Array.isArray(item)) && item !== '' && item !== []) {
       return item[item.length - 1];
     }
-    else if ((typeof item === 'string' || Array.isArray(item)) && this.empty(item)) {
+    else if ((typeof item === 'string' || Array.isArray(item)) && (item === '' || item === [])) {
         throw new Error(`Empty input:\nCannot retrieve last of empty string or array`);
     }
     else {
@@ -350,10 +346,10 @@ const ezRead = {
   },
 
   tail: function(item) {
-    if ((typeof item === 'string' || Array.isArray(item)) && this.not(this.empty(item))) {
+    if ((typeof item === 'string' || Array.isArray(item)) && item !== '' && item !== []) {
       return item.slice(1, item.length);
     }
-    else if ((typeof item === 'string' || Array.isArray(item)) && this.empty(item)) {
+    else if ((typeof item === 'string' || Array.isArray(item)) && (item === '' || item === [])) {
         throw new Error(`Empty input:\nCannot retrieve init of empty string or array`);
     }
     else {
@@ -399,5 +395,7 @@ function makeReverseArray(firstNumber, secondNumber) {
 }
 
 // ------------------------------------------------------------------------------------------
+
+console.log(ezRead.tail([1,2,3,4,6]))
 
 module.exports = ezRead 
