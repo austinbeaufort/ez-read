@@ -357,6 +357,11 @@ const ezRead = {
     }
   },
 
+  take: function(number, item) {
+      const result = item.slice(0, number);
+      return result;
+  },
+
   unique: function(arr) {
     if (Array.isArray(arr)) {
       let uniques = [];
@@ -395,6 +400,5 @@ function makeReverseArray(firstNumber, secondNumber) {
 }
 
 // ------------------------------------------------------------------------------------------
-
 
 module.exports = ezRead 
