@@ -436,5 +436,5 @@ function makeReverseArray(firstNumber, secondNumber) {
 }
 
 // ------------------------------------------------------------------------------------------
-console.log(ezRead.drop(2, "ramda"))
+
 module.exports = ezRead
