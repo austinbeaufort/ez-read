@@ -42,6 +42,15 @@ const ezRead = {
     return isDigit;
   },
 
+  drop: function(num, item) {
+      if (typeof num === 'number' && (typeof item === 'string' || Array.isArray(item))) {
+        return item.slice(num)
+      }
+      else {
+          throw new TypeError(`Expected: (number, (string or array))\n Actual: (${typeof num}, ${typeof item})`)
+      }
+  },
+
   empty: function(item) {
     const isEmpty = item.length === 0
     if (typeof item === 'string' || Array.isArray(item)) {
@@ -427,5 +436,5 @@ function makeReverseArray(firstNumber, secondNumber) {
 }
 
 // ------------------------------------------------------------------------------------------
-
+console.log(ezRead.drop(2, "ramda"))
 module.exports = ezRead
