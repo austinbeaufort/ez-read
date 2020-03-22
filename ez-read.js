@@ -336,6 +336,33 @@ const ezRead = {
     }
   },
 
+  splitEvery: function(num, array) {
+      if (typeof num === 'number' && Array.isArray(array)) {
+        let splitArray = []
+        let currentArray = []
+        for (let i = 1; i < array.length + 1; i++) {
+          currentArray.push(array[i - 1])
+          if (i % num === 0) {
+              splitArray.push(currentArray)
+              currentArray = []
+          } 
+          else if (i === array.length) {
+              splitArray.push(currentArray)
+          }
+        }
+        return splitArray
+      }
+      else if (Array.isArray(num), Array.isArray(array)){
+          return `Expected: (number, array)\n Actual: (array, array)`
+      }
+      else if (!Array.isArray(num), Array.isArray(array)) {
+        return `Expected: (number, array)\n Actual: (${typeof num}, array)`
+      }
+      else {
+        return `Expected: (number, array)\n Actual: (${typeof num}, ${typeof array})`
+      }
+  },
+
   sum: function(...numbers) {
     let numbersFlattened = numbers.reduce((accumulator, currentValue) => accumulator.concat(currentValue), []);
 
@@ -401,4 +428,4 @@ function makeReverseArray(firstNumber, secondNumber) {
 
 // ------------------------------------------------------------------------------------------
 
-module.exports = ezRead 
+module.exports = ezRead
