@@ -401,7 +401,7 @@ const ezRead = {
   unique: function(arr) {
     if (Array.isArray(arr)) {
       let uniques = [];
-      for (item of arr) {
+      for (let item of arr) {
         if(uniques.indexOf(item) === -1) {
           uniques.push(item);
         }
